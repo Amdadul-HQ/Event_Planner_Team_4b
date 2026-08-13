@@ -1,131 +1,124 @@
 "use client"
 
-import { useRef } from "react"
-import { motion, useInView } from "framer-motion"
-import { Calendar, CheckCircle, Search, Users } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { motion } from "framer-motion"
+import {
+  CalendarPlus,
+  Share2,
+  UsersRound,
+  Sparkles,
+  ArrowRight,
+  ShieldCheck,
+  Zap,
+} from "lucide-react"
 import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
+
+const steps = [
+  {
+    number: "01",
+    title: "Design & Publish",
+    tagline: "Live in under 2 minutes",
+    description:
+      "Choose between Public or Private, configure optional ticketing fees, set event venue or live virtual stream links, and customize custom registration rules.",
+    icon: CalendarPlus,
+  },
+  {
+    number: "02",
+    title: "Promote & Manage Guests",
+    tagline: "Direct invites & instant approval",
+    description:
+      "Send direct email invitations to VIP members, review pending join requests, collect instant payments, and manage your attendee roster with 1-click controls.",
+    icon: Share2,
+  },
+  {
+    number: "03",
+    title: "Host & Build Community",
+    tagline: "Seamless check-ins & reviews",
+    description:
+      "Scan attendee tickets at the door, deliver unforgettable live experiences, collect verified reviews, and establish your loyal community of recurring attendees.",
+    icon: UsersRound,
+  },
+]
 
 export default function HowItWorksSection() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
-
-  const steps = [
-    {
-      title: "Create & Customize",
-      description:
-        "Create public or private events with optional registration fees. Customize every aspect of your event.",
-      icon: <Calendar className="h-8 w-8 text-white" />,
-      color: "bg-black",
-      steps: ["Set event visibility (public/private)", "Add optional registration fee", "Customize event details"],
-    },
-    {
-      title: "Discover & Join",
-      description: "Browse upcoming events, filter by your interests, and join with just a few clicks.",
-      icon: <Search className="h-8 w-8 text-black" />,
-      color: "bg-white",
-      steps: ["Browse events by category", "Request access to private events", "Complete payment for paid events"],
-    },
-    {
-      title: "Manage & Connect",
-      description: "Approve participants, send invitations, and build your community around shared interests.",
-      icon: <Users className="h-8 w-8 text-white" />,
-      color: "bg-black",
-      steps: ["Approve or reject requests", "Send direct invitations", "Engage with participants"],
-    },
-  ]
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-  }
-
   return (
-    <section className="relative overflow-hidden py-20">
-      {/* Background elements */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute left-0 top-0 h-64 w-64 rounded-full bg-gray-100 opacity-30 blur-3xl"></div>
-        <div className="absolute bottom-0 right-0 h-96 w-96 rounded-full bg-gray-100 opacity-30 blur-3xl"></div>
-      </div>
+    <section className="py-24 bg-[#111844] text-[#EAE0CF] relative overflow-hidden">
+      {/* Background ambient lighting */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[300px] bg-[#4B5694]/15 rounded-full blur-[150px] pointer-events-none" />
 
-      <div className="container mx-auto px-4">
-        <motion.div
-          className="mb-16 text-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5 }}
-        >
-          <Badge className="mb-4 bg-black text-white">Simple Process</Badge>
-          <h2 className="mb-4 text-3xl font-bold tracking-tight text-gray-900 md:text-4xl">How It Works</h2>
-          <p className="mx-auto max-w-2xl text-lg text-gray-600">
-            Our platform makes it easy to create, discover, and participate in events that matter to you
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <Badge className="bg-[#4B5694]/30 text-[#EAE0CF] border border-[#7288AE]/40 mb-3 px-3 py-1 text-xs">
+            <Sparkles className="w-3 h-3 mr-1.5 text-[#EAE0CF]" />
+            Simple 3-Step Process
+          </Badge>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
+            How EvenTora Works
+          </h2>
+          <p className="mt-3 text-[#7288AE] text-base sm:text-lg">
+            A frictionless platform built for organizers and attendees alike. From planning to execution in three intuitive steps.
           </p>
-        </motion.div>
-
-        <div className="relative" ref={ref}>
-    
-
-          <motion.div
-            className="grid gap-12 md:grid-cols-3"
-            variants={containerVariants}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-          >
-            {steps.map((step, index) => (
-              <motion.div key={index} className="relative" variants={itemVariants}>
-                <div className="relative z-10 flex flex-col items-center text-center">
-                  <div
-                    className={`relative mb-6 flex h-20 w-20 items-center justify-center rounded-full ${step.color} border border-gray-200`}
-                  >
-                    {step.icon}
-                    <div className="absolute -right-1 -top-1 flex h-8 w-8 items-center justify-center rounded-full bg-white text-lg font-bold text-gray-900 shadow-md">
-                      {index + 1}
-                    </div>
-                  </div>
-                  <h3 className="mb-2 text-xl font-semibold text-gray-900">{step.title}</h3>
-                  <p className="mb-6 text-gray-600">{step.description}</p>
-                  <ul className="space-y-3 text-left">
-                    {step.steps.map((item, i) => (
-                      <motion.li
-                        key={i}
-                        className="flex items-start"
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.3, delay: 0.5 + i * 0.1 }}
-                      >
-                        <CheckCircle className="mr-2 h-5 w-5 flex-shrink-0 text-black" />
-                        <span className="text-gray-600">{item}</span>
-                      </motion.li>
-                    ))}
-                  </ul>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
         </div>
 
-        <motion.div
-          className="mt-16 text-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-        >
-          <Button size="lg" className="bg-black hover:bg-gray-900">
-            Get Started Now
+        {/* 3 Step Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+          {steps.map((step, idx) => {
+            const Icon = step.icon
+            return (
+              <motion.div
+                key={step.number}
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.15 }}
+                className="group relative rounded-3xl border border-[#7288AE]/30 bg-[#18225c]/60 p-8 backdrop-blur-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-[#4B5694]/25 hover:border-[#7288AE]/60"
+              >
+                {/* Step Top */}
+                <div className="flex items-center justify-between mb-6">
+                  <div className="p-3.5 rounded-2xl bg-[#4B5694]/40 border border-[#7288AE]/40 text-[#EAE0CF] group-hover:scale-110 transition-transform duration-300">
+                    <Icon className="h-6 w-6" />
+                  </div>
+                  <span className="text-3xl font-black text-[#7288AE]/50 group-hover:text-[#EAE0CF] transition-colors">
+                    {step.number}
+                  </span>
+                </div>
+
+                <h3 className="text-xl font-bold text-white group-hover:text-[#EAE0CF] transition-colors">
+                  {step.title}
+                </h3>
+                <p className="text-xs font-semibold text-[#EAE0CF]/80 mt-1">{step.tagline}</p>
+
+                <p className="mt-3 text-xs sm:text-sm text-[#7288AE] leading-relaxed">
+                  {step.description}
+                </p>
+
+                <div className="mt-6 pt-4 border-t border-[#7288AE]/25 flex items-center justify-between text-xs text-[#7288AE]">
+                  <span className="flex items-center gap-1.5 text-[#EAE0CF] font-medium">
+                    <ShieldCheck className="h-4 w-4 text-[#EAE0CF]" />
+                    Automated & Secure
+                  </span>
+                  <Zap className="h-4 w-4 text-[#EAE0CF] group-hover:animate-bounce" />
+                </div>
+              </motion.div>
+            )
+          })}
+        </div>
+
+        {/* Bottom CTA */}
+        <div className="mt-14 text-center">
+          <Button
+            size="lg"
+            className="bg-[#EAE0CF] text-[#111844] hover:bg-[#f5efe4] font-bold px-8 rounded-xl shadow-xl shadow-[#EAE0CF]/10 group"
+            asChild
+          >
+            <Link href="/register">
+              Start Creating Now — It's Free
+              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Link>
           </Button>
-        </motion.div>
+        </div>
       </div>
     </section>
   )

@@ -1,18 +1,21 @@
 import HomePage from "@/pages/HomePage/HomePage";
 import { getAllEvents } from "@/service/Events";
-import { use } from "react";
 
-const Home = () => {
+export const dynamic = "force-dynamic";
 
-const {data} = use(getAllEvents())
-const events = data?.all
+const Home = async () => {
+  let events = [];
+  try {
+    const res = await getAllEvents();
+    events = res?.data?.all || [];
+  } catch (err) {
+    console.error("Error loading events for homepage:", err);
+  }
 
   return (
-    <>
-      <main className="min-h-[calc(100vh-200px)]">
-        <HomePage events={events} />
-      </main>
-    </>
+    <main className="min-h-screen">
+      <HomePage events={events} />
+    </main>
   );
 };
 
