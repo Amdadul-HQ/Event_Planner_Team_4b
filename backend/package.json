@@ -16,7 +16,11 @@
     "prisma:dbprint": "npx prisma db pull --print",
     "prisma:dbpull": "npx prisma db pull",
     "prisma:dbpush": "npx prisma db push",
-    "studio": "npx prisma studio"
+    "studio": "npx prisma studio",
+    "seed": "ts-node prisma/seed.ts"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
   },
   "keywords": [],
   "author": "",

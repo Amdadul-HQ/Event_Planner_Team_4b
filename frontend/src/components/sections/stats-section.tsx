@@ -1,82 +1,79 @@
 "use client"
 
-import { useRef } from "react"
-import { motion, useInView } from "framer-motion"
+import { motion } from "framer-motion"
 import { Calendar, CreditCard, Star, Users } from "lucide-react"
 
 export default function StatsSection() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
-
   const stats = [
     {
-      icon: <Calendar className="h-8 w-8 text-black" />,
+      icon: Calendar,
       value: "10,000+",
       label: "Events Hosted",
-      description: "Successful events created on our platform",
+      description: "Across tech, music, business & private retreats",
+      color: "text-[#EAE0CF]",
+      bg: "bg-[#4B5694]/30",
+      border: "border-[#7288AE]/40",
     },
     {
-      icon: <Users className="h-8 w-8 text-black" />,
+      icon: Users,
       value: "50,000+",
-      label: "Active Users",
-      description: "Event creators and participants",
+      label: "Active Community Members",
+      description: "Engaged event creators and attendees",
+      color: "text-[#EAE0CF]",
+      bg: "bg-[#4B5694]/30",
+      border: "border-[#7288AE]/40",
     },
     {
-      icon: <CreditCard className="h-8 w-8 text-black" />,
-      value: "$2M+",
+      icon: CreditCard,
+      value: "$2,000,000+",
       label: "Payments Processed",
-      description: "Secure transactions for paid events",
+      description: "Encrypted, frictionless transaction volume",
+      color: "text-[#EAE0CF]",
+      bg: "bg-[#4B5694]/30",
+      border: "border-[#7288AE]/40",
     },
     {
-      icon: <Star className="h-8 w-8 text-black" />,
-      value: "99%",
-      label: "Satisfaction Rate",
-      description: "From event organizers and attendees",
+      icon: Star,
+      value: "99.8%",
+      label: "Satisfaction Rating",
+      description: "Over 8,500 verified organizer & guest reviews",
+      color: "text-[#EAE0CF]",
+      bg: "bg-[#4B5694]/30",
+      border: "border-[#7288AE]/40",
     },
   ]
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-  }
-
   return (
-    <section className="py-20">
-      <div className="container mx-auto px-4">
-        <div className="mx-auto max-w-6xl" ref={ref}>
-          <motion.div
-            className="grid gap-8 rounded-2xl bg-white p-8 shadow-xl md:grid-cols-2 lg:grid-cols-4 md:p-12"
-            variants={containerVariants}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-          >
-            {stats.map((stat, index) => (
+    <section className="py-20 bg-[#0e143d] text-[#EAE0CF] relative overflow-hidden border-t border-b border-[#7288AE]/25">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {stats.map((stat, index) => {
+            const Icon = stat.icon
+            return (
               <motion.div
                 key={index}
-                className="group relative overflow-hidden rounded-xl border border-gray-100 bg-white p-8 text-center shadow-sm transition-all hover:shadow-md"
-                variants={itemVariants}
-                whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+                whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                className="rounded-3xl border border-[#7288AE]/30 bg-[#18225c]/50 p-6 backdrop-blur-xl transition-all duration-300 hover:border-[#7288AE]/60 hover:shadow-xl hover:shadow-[#4B5694]/25"
               >
-                <div className="absolute -right-16 -top-16 h-32 w-32 rounded-full bg-gray-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
-                <div className="relative mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gray-100">
-                  {stat.icon}
+                <div className={`w-12 h-12 rounded-2xl ${stat.bg} ${stat.color} border ${stat.border} flex items-center justify-center mb-5`}>
+                  <Icon className="h-6 w-6 text-[#EAE0CF]" />
                 </div>
-                <h3 className="mb-2 text-3xl font-bold text-gray-900">{stat.value}</h3>
-                <p className="mb-1 font-medium text-gray-700">{stat.label}</p>
-                <p className="text-sm text-gray-500">{stat.description}</p>
+                <h3 className="text-3xl font-extrabold text-[#EAE0CF] tracking-tight">
+                  {stat.value}
+                </h3>
+                <p className="text-sm font-semibold text-white mt-1">
+                  {stat.label}
+                </p>
+                <p className="text-xs text-[#7288AE] mt-1 leading-relaxed">
+                  {stat.description}
+                </p>
               </motion.div>
-            ))}
-          </motion.div>
+            )
+          })}
         </div>
       </div>
     </section>

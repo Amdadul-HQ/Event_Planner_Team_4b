@@ -2,104 +2,114 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { ChevronDown } from "lucide-react"
+import { ChevronDown, Sparkles } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
-import { cn } from "@/lib/utils"
 
 const faqs = [
   {
-    question: "What types of events can I create on the platform?",
+    question: "What event visibility & ticketing types does EvenTora support?",
     answer:
-      "You can create four types of events: Public Free (open to all with instant access), Public Paid (open to all with payment required), Private Free (invitation or approval required), and Private Paid (invitation or approval required with payment).",
+      "EvenTora supports 4 versatile formats: Public Free (instant 1-click RSVP for everyone), Public Paid (open to all with automated Stripe/SSLCommerz payment checkout), Private Free (invite-only or join requests requiring host manual approval), and Private Paid (exclusive VIP application + payment approval pipeline).",
   },
   {
-    question: "How do payments work for paid events?",
+    question: "How do ticket payments and organizer payouts work?",
     answer:
-      "Our platform integrates secure payment processing. When you create a paid event, participants will complete payment during registration. For public paid events, they'll be automatically approved after payment. For private paid events, they'll still need your approval after payment.",
+      "When an attendee registers for a paid event, payment is processed securely via SSL-encrypted gateways. For public paid events, digital tickets with QR codes are issued immediately upon successful payment. Hosts can monitor their balance and request instant payouts directly to their bank account.",
   },
   {
-    question: "Can I invite specific people to my events?",
+    question: "How does the Private Event approval pipeline work?",
     answer:
-      "Yes! You can send direct invitations to registered users. For paid events, invitees will see a Pay & Accept button. Upon payment, their membership enters a Pending state until you approve them.",
+      "For private events, users submit a join request or enter via a direct email invitation link. As the organizer, you receive instant notifications in your dashboard where you can review applicant profiles and Approve or Reject with a single click.",
   },
   {
-    question: "How do I manage participants for my events?",
+    question: "Can I send direct invitations to specific email addresses?",
     answer:
-      "As an event creator, you have full control over your participant list. You can approve or reject join requests, ban participants if needed, and send direct invitations to specific users.",
+      "Yes! You can invite registered users or email contacts directly. Invitees receive an interactive notification and email with a 1-click RSVP button. For paid private events, invitees can pay and accept seamlessly.",
   },
   {
-    question: "Is there a fee for using the platform?",
+    question: "Is there a free tier for hosting non-commercial community events?",
     answer:
-      "The platform is free to use for creating and joining free events. For paid events, we charge a small service fee on each transaction to cover payment processing and platform maintenance.",
+      "Yes! Free events are 100% free to create and join with zero platform fees. For paid events, a modest standard payment processing fee is applied at checkout to ensure top-grade infrastructure, escrow security, and ticket generation.",
   },
 ]
 
 export default function FaqSection() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const [openIndex, setOpenIndex] = useState<number | null>(0)
 
   const toggleFaq = (index: number) => {
     setOpenIndex(openIndex === index ? null : index)
   }
 
   return (
-    <section className="bg-gray-50 py-20">
-      <div className="container mx-auto px-4">
-        <motion.div
-          className="mb-12 text-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5 }}
-        >
-          <Badge className="mb-4 bg-black text-white">FAQ</Badge>
-          <h2 className="mb-4 text-3xl font-bold tracking-tight text-gray-900 md:text-4xl">
+    <section className="py-24 bg-[#0e143d] text-[#EAE0CF] relative overflow-hidden border-t border-[#7288AE]/25">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <Badge className="bg-[#4B5694]/30 text-[#EAE0CF] border border-[#7288AE]/40 mb-3 px-3 py-1 text-xs">
+            <Sparkles className="w-3 h-3 mr-1.5 text-[#EAE0CF]" />
+            Got Questions?
+          </Badge>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
             Frequently Asked Questions
           </h2>
-          <p className="mx-auto max-w-2xl text-lg text-gray-600">
-            Find answers to common questions about our event platform
+          <p className="mt-3 text-[#7288AE] text-base sm:text-lg">
+            Everything you need to know about hosting, joining, and monetizing events on EvenTora.
           </p>
-        </motion.div>
+        </div>
 
-        <div className="mx-auto max-w-3xl">
-          <div className="space-y-4">
-            {faqs.map((faq, index) => (
+        {/* Accordion List */}
+        <div className="max-w-3xl mx-auto space-y-4">
+          {faqs.map((faq, index) => {
+            const isOpen = openIndex === index
+            return (
               <motion.div
                 key={index}
-                className={cn(
-                  "overflow-hidden rounded-xl border border-gray-200 bg-white transition-all",
-                  openIndex === index ? "shadow-md" : "",
-                )}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.3, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: index * 0.08 }}
+                className={`rounded-2xl border transition-all duration-300 overflow-hidden ${
+                  isOpen
+                    ? "bg-[#18225c]/90 border-[#EAE0CF]/60 shadow-xl shadow-[#4B5694]/25"
+                    : "bg-[#18225c]/40 border-[#7288AE]/30 hover:border-[#7288AE]/60 hover:bg-[#18225c]/70"
+                }`}
               >
                 <button
-                  className="flex w-full items-center justify-between p-6 text-left"
                   onClick={() => toggleFaq(index)}
+                  className="w-full p-6 text-left flex items-center justify-between gap-4 focus:outline-none"
+                  aria-expanded={isOpen}
                 >
-                  <h3 className="text-lg font-semibold text-gray-900">{faq.question}</h3>
-                  <motion.div animate={{ rotate: openIndex === index ? 180 : 0 }} transition={{ duration: 0.3 }}>
-                    <ChevronDown className="h-5 w-5 text-gray-500" />
-                  </motion.div>
+                  <span className="text-base sm:text-lg font-bold text-white leading-snug">
+                    {faq.question}
+                  </span>
+                  <div
+                    className={`p-2 rounded-xl border transition-transform duration-300 shrink-0 ${
+                      isOpen
+                        ? "bg-[#4B5694] text-[#EAE0CF] border-[#7288AE]/50 rotate-180"
+                        : "bg-[#111844] text-[#7288AE] border-[#7288AE]/30"
+                    }`}
+                  >
+                    <ChevronDown className="h-4 w-4" />
+                  </div>
                 </button>
-                <AnimatePresence>
-                  {openIndex === index && (
+
+                <AnimatePresence initial={false}>
+                  {isOpen && (
                     <motion.div
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
                     >
-                      <div className="border-t border-gray-100 px-6 pb-6 pt-4">
-                        <p className="text-gray-600">{faq.answer}</p>
+                      <div className="px-6 pb-6 pt-1 border-t border-[#7288AE]/20 text-sm text-[#EAE0CF]/90 leading-relaxed">
+                        {faq.answer}
                       </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
               </motion.div>
-            ))}
-          </div>
+            )
+          })}
         </div>
       </div>
     </section>

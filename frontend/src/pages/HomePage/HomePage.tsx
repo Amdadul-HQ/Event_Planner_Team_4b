@@ -1,4 +1,4 @@
-
+import CategoryShowcaseSection from "@/components/sections/category-showcase-section";
 import CtaSection from "@/components/sections/cta-section";
 import EventTypesSection from "@/components/sections/event-types-section";
 import FaqSection from "@/components/sections/faq-section";
@@ -11,52 +11,52 @@ import TestimonialsSection from "@/components/sections/testimonials-section";
 import { Loader2 } from "lucide-react";
 import { Suspense } from "react";
 
-const HomePage = ({events}:{events:Event[]}) => {
-console.log(events)
-    return (
-      <div className="flex min-h-screen w-full flex-col bg-white">
-
-
+const HomePage = ({ events }: { events: Event[] }) => {
+  return (
+    <div className="flex min-h-screen w-full flex-col bg-[#111844] text-[#EAE0CF]">
       <main>
-        <Suspense fallback={<Loader2 />}>
+        <Suspense fallback={<div className="h-96 flex items-center justify-center bg-[#111844]"><Loader2 className="h-8 w-8 text-[#4B5694] animate-spin" /></div>}>
           <HeroSection />
         </Suspense>
 
-        <Suspense fallback={<Loader2 />}>
+        <Suspense fallback={<div className="h-96 flex items-center justify-center bg-[#111844]"><Loader2 className="h-8 w-8 text-[#4B5694] animate-spin" /></div>}>
+          <CategoryShowcaseSection />
+        </Suspense>
+
+        <Suspense fallback={<div className="h-96 flex items-center justify-center bg-[#111844]"><Loader2 className="h-8 w-8 text-[#4B5694] animate-spin" /></div>}>
           <FeaturedEventsSection events={events} />
         </Suspense>
 
-        <Suspense fallback={<Loader2 />}>
+        <Suspense fallback={<div className="h-96 flex items-center justify-center bg-[#111844]"><Loader2 className="h-8 w-8 text-[#4B5694] animate-spin" /></div>}>
           <EventTypesSection />
         </Suspense>
 
-        <Suspense fallback={<Loader2 />}>
+        <Suspense fallback={<div className="h-96 flex items-center justify-center bg-[#111844]"><Loader2 className="h-8 w-8 text-[#4B5694] animate-spin" /></div>}>
           <HowItWorksSection />
         </Suspense>
 
-        <Suspense fallback={<Loader2 />}>
-          <TestimonialsSection />
-        </Suspense>
-
-        <Suspense fallback={<Loader2 />}>
+        <Suspense fallback={<div className="h-96 flex items-center justify-center bg-[#111844]"><Loader2 className="h-8 w-8 text-[#4B5694] animate-spin" /></div>}>
           <StatsSection />
         </Suspense>
 
-        <Suspense fallback={<Loader2 />}>
+        <Suspense fallback={<div className="h-96 flex items-center justify-center bg-[#111844]"><Loader2 className="h-8 w-8 text-[#4B5694] animate-spin" /></div>}>
+          <TestimonialsSection />
+        </Suspense>
+
+        <Suspense fallback={<div className="h-96 flex items-center justify-center bg-[#111844]"><Loader2 className="h-8 w-8 text-[#4B5694] animate-spin" /></div>}>
           <FaqSection />
         </Suspense>
 
-        <Suspense fallback={<Loader2 />}>
+        <Suspense fallback={<div className="h-96 flex items-center justify-center bg-[#111844]"><Loader2 className="h-8 w-8 text-[#4B5694] animate-spin" /></div>}>
           <NewsletterSection />
         </Suspense>
 
-        <Suspense fallback={<Loader2 />}>
+        <Suspense fallback={<div className="h-96 flex items-center justify-center bg-[#111844]"><Loader2 className="h-8 w-8 text-[#4B5694] animate-spin" /></div>}>
           <CtaSection />
         </Suspense>
       </main>
-
     </div>
-    );
+  );
 };
 
 export default HomePage;

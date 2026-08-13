@@ -95,12 +95,13 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`w-full py-4 px-6 flex items-center justify-between border-b z-50 transition-all duration-300 ${
-        scrolled ? "fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-sm shadow-sm" : "relative bg-white"
+      className={`w-full py-4 px-6 flex items-center justify-between border-b border-[#7288AE]/25 z-50 transition-all duration-300 ${
+        scrolled ? "fixed top-0 left-0 right-0 bg-[#111844]/95 backdrop-blur-md shadow-lg shadow-[#0a0e29]/50" : "relative bg-[#111844]"
       }`}
     >
-      <Link href="/" className="text-xl font-bold">
-        EvenTora
+      <Link href="/" className="text-xl font-bold flex items-center">
+        <span className="text-2xl font-black text-[#EAE0CF]">EvenT</span>
+        <span className="text-2xl font-black text-[#7288AE]">ora</span>
       </Link>
 
       {isMobile ? (
@@ -110,7 +111,7 @@ export default function Navbar() {
           )}
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="outline" size="icon" className="ml-2">
+              <Button variant="outline" size="icon" className="ml-2 bg-[#18225c] border-[#7288AE]/40 text-[#EAE0CF]">
                 <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M1.5 3C1.22386 3 1 3.22386 1 3.5C1 3.77614 1.22386 4 1.5 4H13.5C13.7761 4 14 3.77614 14 3.5C14 3.22386 13.7761 3 13.5 3H1.5ZM1 7.5C1 7.22386 1.22386 7 1.5 7H13.5C13.7761 7 14 7.22386 14 7.5C14 7.77614 13.7761 8 13.5 8H1.5C1.22386 8 1 7.77614 1 7.5ZM1 11.5C1 11.2239 1.22386 11 1.5 11H13.5C13.7761 11 14 11.2239 14 11.5C14 11.7761 13.7761 12 13.5 12H1.5C1.22386 12 1 11.7761 1 11.5Z"
@@ -121,7 +122,7 @@ export default function Navbar() {
                 </svg>
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="p-4">
+            <SheetContent side="right" className="p-4 bg-[#111844] text-[#EAE0CF] border-[#7288AE]/30">
               <VisuallyHidden>
                 <DialogTitle>Navigation Menu</DialogTitle>
               </VisuallyHidden>
@@ -130,8 +131,8 @@ export default function Navbar() {
                   href="/"
                   className={`text-lg font-medium transition-colors ${
                     pathname === "/"
-                      ? "text-black font-bold border-l-4 border-primary pl-2"
-                      : "text-gray-500 hover:text-black"
+                      ? "text-[#EAE0CF] font-bold border-l-4 border-[#4B5694] pl-2"
+                      : "text-[#7288AE] hover:text-[#EAE0CF]"
                   }`}
                 >
                   Home
@@ -140,8 +141,8 @@ export default function Navbar() {
                   href="/events"
                   className={`text-lg font-medium transition-colors ${
                     pathname === "/events"
-                      ? "text-black font-bold border-l-4 border-primary pl-2"
-                      : "text-gray-500 hover:text-black"
+                      ? "text-[#EAE0CF] font-bold border-l-4 border-[#4B5694] pl-2"
+                      : "text-[#7288AE] hover:text-[#EAE0CF]"
                   }`}
                 >
                   Events
@@ -150,8 +151,8 @@ export default function Navbar() {
                   href="/about"
                   className={`text-lg font-medium transition-colors ${
                     pathname === "/about"
-                      ? "text-black font-bold border-l-4 border-primary pl-2"
-                      : "text-gray-500 hover:text-black"
+                      ? "text-[#EAE0CF] font-bold border-l-4 border-[#4B5694] pl-2"
+                      : "text-[#7288AE] hover:text-[#EAE0CF]"
                   }`}
                 >
                   About
@@ -162,22 +163,22 @@ export default function Navbar() {
                       href="/dashboard"
                       className={`text-lg font-medium transition-colors ${
                         pathname?.startsWith("/dashboard")
-                          ? "text-black font-bold border-l-4 border-primary pl-2"
-                          : "text-gray-500 hover:text-black"
+                          ? "text-[#EAE0CF] font-bold border-l-4 border-[#4B5694] pl-2"
+                          : "text-[#7288AE] hover:text-[#EAE0CF]"
                       }`}
                     >
                       Dashboard
                     </Link>
-                    <Button onClick={handleLogout} variant="outline" className="justify-start">
+                    <Button onClick={handleLogout} variant="outline" className="justify-start border-[#7288AE]/40 bg-[#18225c] text-[#EAE0CF]">
                       Logout
                     </Button>
                   </>
                 ) : (
                   <>
-                    <Button variant="outline" className="justify-start">
+                    <Button variant="outline" className="justify-start border-[#7288AE]/40 bg-[#18225c] text-[#EAE0CF]" asChild>
                       <Link href="/login">Login</Link>
                     </Button>
-                    <Button className="justify-start">
+                    <Button className="justify-start bg-[#EAE0CF] text-[#111844] hover:bg-[#f5efe4] font-bold" asChild>
                       <Link href="/register">Sign up</Link>
                     </Button>
                   </>
@@ -187,11 +188,11 @@ export default function Navbar() {
           </Sheet>
         </div>
       ) : (
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-6">
           <Link
             href="/"
             className={`text-sm font-medium transition-colors ${
-              pathname === "/" ? "text-black font-bold border-b-2 border-primary" : "text-gray-500 hover:text-black"
+              pathname === "/" ? "text-[#EAE0CF] font-bold border-b-2 border-[#4B5694] pb-1" : "text-[#7288AE] hover:text-[#EAE0CF]"
             }`}
           >
             Home
@@ -200,8 +201,8 @@ export default function Navbar() {
             href="/events"
             className={`text-sm font-medium transition-colors ${
               pathname === "/events"
-                ? "text-black font-bold border-b-2 border-primary"
-                : "text-gray-500 hover:text-black"
+                ? "text-[#EAE0CF] font-bold border-b-2 border-[#4B5694] pb-1"
+                : "text-[#7288AE] hover:text-[#EAE0CF]"
             }`}
           >
             Events
@@ -210,8 +211,8 @@ export default function Navbar() {
             href="/about"
             className={`text-sm font-medium transition-colors ${
               pathname === "/about"
-                ? "text-black font-bold border-b-2 border-primary"
-                : "text-gray-500 hover:text-black"
+                ? "text-[#EAE0CF] font-bold border-b-2 border-[#4B5694] pb-1"
+                : "text-[#7288AE] hover:text-[#EAE0CF]"
             }`}
           >
             About
@@ -223,26 +224,26 @@ export default function Navbar() {
                 href="/dashboard"
                 className={`text-sm font-medium transition-colors ${
                   pathname?.startsWith("/dashboard")
-                    ? "text-black font-bold border-b-2 border-primary"
-                    : "text-gray-500 hover:text-black"
+                    ? "text-[#EAE0CF] font-bold border-b-2 border-[#4B5694] pb-1"
+                    : "text-[#7288AE] hover:text-[#EAE0CF]"
                 }`}
               >
                 Dashboard
               </Link>
-              <Button onClick={handleLogout} variant="outline" size="sm">
+              <Button onClick={handleLogout} variant="outline" size="sm" className="border-[#7288AE]/40 bg-[#18225c]/50 text-[#EAE0CF] hover:bg-[#18225c]">
                 Logout
               </Button>
               <NotificationsDesktop notifications={notifications} unreadCount={unreadCount} isLoading={isLoading} />
             </>
           ) : (
-            <>
-              <Button variant="outline" size="sm">
+            <div className="flex items-center gap-3">
+              <Button variant="outline" size="sm" className="border-[#7288AE]/40 bg-[#18225c]/50 text-[#EAE0CF] hover:bg-[#18225c]" asChild>
                 <Link href="/login">Login</Link>
               </Button>
-              <Button size="sm">
+              <Button size="sm" className="bg-[#EAE0CF] text-[#111844] hover:bg-[#f5efe4] font-bold shadow-md shadow-[#EAE0CF]/10" asChild>
                 <Link href="/register">Sign up</Link>
               </Button>
-            </>
+            </div>
           )}
         </div>
       )}

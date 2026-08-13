@@ -1,58 +1,51 @@
-
 "use client"
-/* eslint react/no-unescaped-entities: "off" */
 
 import { useState, useEffect } from "react"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
-import { ChevronLeft, ChevronRight, Star } from "lucide-react"
+import { ChevronLeft, ChevronRight, Star, Quote, Sparkles, CheckCircle2 } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 
 const testimonials = [
   {
     id: "1",
     name: "Sarah Chen",
-    role: "Event Organizer",
+    role: "Lead Tech Conference Organizer",
+    event: "Global AI & Tech Summit",
     comment:
-      "This platform has revolutionized how I manage my events. The payment integration and approval workflows save me hours of manual work.",
+      "EvenTora completely elevated how our team operates. The seamless payment escrow, instant ticket QR verification, and custom approval workflows saved us over 40 hours of manual coordination.",
     rating: 5,
-    avatar: "/images/11.jpg?height=100&width=100",
+    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80",
   },
   {
     id: "2",
-    name: "Michael Wong",
-    role: "Conference Host",
+    name: "Alex Rivera",
+    role: "Festival Director & Producer",
+    event: "Annual Indie Music Festival",
     comment:
-      "The ability to create both public and private events with different fee structures gives me the flexibility I need for various types of conferences.",
+      "Having the capability to support both public paid festival tickets and exclusive private artist masterclasses under one unified dashboard has been a complete game changer for our business.",
     rating: 5,
-    avatar: "/images/22.jpg?height=100&width=100",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80",
   },
   {
     id: "3",
-    name: "Priya Sharma",
-    role: "Regular Attendee",
+    name: "Emily Watson",
+    role: "Executive Community Manager",
+    event: "Founders Mountain Retreat",
     comment:
-      "I love how easy it is to discover and join events. The payment process is seamless, and I can see all my upcoming events in one place.",
-    rating: 4,
-    avatar: "/images/33.jpg?height=100&width=100",
+      "The private event approval pipeline is flawless. We can vet every executive application before confirming tickets, ensuring unmatched networking quality for our private retreats.",
+    rating: 5,
+    avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80",
   },
   {
     id: "4",
     name: "David Kim",
-    role: "Workshop Facilitator",
+    role: "Full-Stack Instructor & Developer",
+    event: "Next.js 15 Masterclass",
     comment:
-      "As someone who runs both free community workshops and paid professional training, this platform perfectly accommodates all my needs.",
+      "From ticketing and reminders to live Q&A check-ins, the attendee feedback has been 100% positive. EvenTora is hands-down the most intuitive event software on the market.",
     rating: 5,
-    avatar: "/images/44.jpg?height=100&width=100",
-  },
-  {
-    id: "5",
-    name: "Lisa Nguyen",
-    role: "Corporate Event Planner",
-    comment:
-      "The private event features with approval workflows have made managing corporate events so much more efficient. Highly recommended!",
-    rating: 5,
-    avatar: "/images/55.jpg?height=100&width=100",
+    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80",
   },
 ]
 
@@ -62,11 +55,9 @@ export default function TestimonialsSection() {
 
   useEffect(() => {
     if (!autoplay) return
-
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % testimonials.length)
-    }, 5000)
-
+    }, 6000)
     return () => clearInterval(interval)
   }, [autoplay])
 
@@ -80,121 +71,118 @@ export default function TestimonialsSection() {
     setActiveIndex((prev) => (prev + 1) % testimonials.length)
   }
 
+  const current = testimonials[activeIndex]
+
   return (
-    <section className="relative overflow-hidden bg-black py-20 text-white">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 z-0">
-        <motion.div
-          className="absolute left-[10%] top-[20%] h-64 w-64 rounded-full bg-white opacity-5 blur-3xl"
-          animate={{
-            x: [0, 30, 0],
-            y: [0, 30, 0],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Number.POSITIVE_INFINITY,
-            ease: "easeInOut",
-          }}
-        />
-        <motion.div
-          className="absolute bottom-[10%] right-[10%] h-96 w-96 rounded-full bg-white opacity-5 blur-3xl"
-          animate={{
-            x: [0, -40, 0],
-            y: [0, -40, 0],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Number.POSITIVE_INFINITY,
-            ease: "easeInOut",
-          }}
-        />
-      </div>
+    <section className="py-24 bg-[#111844] text-[#EAE0CF] relative overflow-hidden">
+      {/* Background glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[#4B5694]/15 rounded-full blur-[160px] pointer-events-none" />
 
-      <div className="container relative z-10 mx-auto px-4">
-        <motion.div
-          className="mb-12 text-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.5 }}
-        >
-          <Badge className="mb-4 bg-white/20 text-white hover:bg-white/30">Testimonials</Badge>
-          <h2 className="mb-4 text-3xl font-bold tracking-tight md:text-4xl">What Our Users Say</h2>
-          <p className="mx-auto max-w-2xl text-lg text-gray-300">
-            Join thousands of satisfied users who are creating and discovering amazing events
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <Badge className="bg-[#4B5694]/30 text-[#EAE0CF] border border-[#7288AE]/40 mb-3 px-3 py-1 text-xs">
+            <Sparkles className="w-3 h-3 mr-1.5 text-[#EAE0CF]" />
+            Organizer & Attendee Voices
+          </Badge>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white">
+            Loved By Thousands Worldwide
+          </h2>
+          <p className="mt-3 text-[#7288AE] text-base sm:text-lg">
+            Hear from industry leaders, creative hosts, and enthusiastic attendees who trust EvenTora.
           </p>
-        </motion.div>
+        </div>
 
-        <div className="relative mx-auto max-w-4xl">
-          <div className="relative overflow-hidden rounded-2xl bg-white/5 p-1 backdrop-blur-sm">
+        {/* Testimonial Card */}
+        <div className="max-w-4xl mx-auto relative">
+          <div className="rounded-3xl border border-[#7288AE]/35 bg-[#18225c]/80 backdrop-blur-2xl p-8 sm:p-14 shadow-2xl relative">
+            {/* Quote Icon */}
+            <div className="absolute top-6 right-8 text-[#7288AE]/25">
+              <Quote className="h-16 w-16" />
+            </div>
+
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeIndex}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.3 }}
-                className="p-8 md:p-12"
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.35 }}
+                className="space-y-6"
               >
-                <div className="mb-6 flex justify-center">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className={`h-6 w-6 ${
-                        i < testimonials[activeIndex].rating ? "fill-white text-white" : "text-gray-600"
-                      }`}
-                    />
+                {/* Rating Stars */}
+                <div className="flex items-center gap-1">
+                  {[...Array(current.rating)].map((_, i) => (
+                    <Star key={i} className="h-5 w-5 fill-[#EAE0CF] text-[#EAE0CF]" />
                   ))}
+                  <span className="ml-2 text-xs font-semibold text-[#7288AE]">
+                    Verified Host Review
+                  </span>
                 </div>
 
-                <p className="mb-8 text-center text-xl italic text-white/90">"{testimonials[activeIndex].comment}"</p>
+                {/* Comment */}
+                <p className="text-lg sm:text-2xl font-medium text-white leading-relaxed italic">
+                  "{current.comment}"
+                </p>
 
-                <div className="flex flex-col items-center">
-                  <div className="relative mb-4 h-16 w-16 overflow-hidden rounded-full border-2 border-white/20">
-                    <Image
-                      src={testimonials[activeIndex].avatar || "/placeholder.svg"}
-                      alt={testimonials[activeIndex].name}
-                      fill
-                      className="object-cover"
-                    />
+                {/* Author Info */}
+                <div className="pt-6 border-t border-[#7288AE]/25 flex flex-wrap items-center justify-between gap-4">
+                  <div className="flex items-center gap-4">
+                    <div className="relative h-14 w-14 rounded-full overflow-hidden border-2 border-[#EAE0CF]/70 shadow-lg bg-[#111844]">
+                      <Image
+                        src={current.avatar}
+                        alt={current.name}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-1.5">
+                        <h4 className="text-base font-bold text-white">{current.name}</h4>
+                        <CheckCircle2 className="h-4 w-4 text-[#EAE0CF]" />
+                      </div>
+                      <p className="text-xs text-[#7288AE]">{current.role}</p>
+                      <p className="text-[11px] text-[#EAE0CF] font-medium mt-0.5">
+                        Host of {current.event}
+                      </p>
+                    </div>
                   </div>
-                  <h4 className="text-lg font-semibold">{testimonials[activeIndex].name}</h4>
-                  <p className="text-gray-300">{testimonials[activeIndex].role}</p>
+
+                  {/* Navigation controls */}
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={handlePrev}
+                      className="p-3 rounded-xl bg-[#111844] hover:bg-[#4B5694] text-[#EAE0CF] border border-[#7288AE]/40 transition-all"
+                      aria-label="Previous Testimonial"
+                    >
+                      <ChevronLeft className="h-5 w-5" />
+                    </button>
+                    <button
+                      onClick={handleNext}
+                      className="p-3 rounded-xl bg-[#111844] hover:bg-[#4B5694] text-[#EAE0CF] border border-[#7288AE]/40 transition-all"
+                      aria-label="Next Testimonial"
+                    >
+                      <ChevronRight className="h-5 w-5" />
+                    </button>
+                  </div>
                 </div>
               </motion.div>
             </AnimatePresence>
-
-            {/* Navigation buttons */}
-            <motion.button
-              className="absolute left-4 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-sm transition-colors hover:bg-white/20"
-              onClick={handlePrev}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <ChevronLeft className="h-6 w-6" />
-            </motion.button>
-            <motion.button
-              className="absolute right-4 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-sm transition-colors hover:bg-white/20"
-              onClick={handleNext}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <ChevronRight className="h-6 w-6" />
-            </motion.button>
           </div>
 
-          {/* Dots indicator */}
-          <div className="mt-8 flex justify-center space-x-2">
-            {testimonials.map((_, index) => (
-              <motion.button
-                key={index}
+          {/* Dots Indicator */}
+          <div className="mt-8 flex justify-center gap-2">
+            {testimonials.map((_, idx) => (
+              <button
+                key={idx}
                 onClick={() => {
-                  setActiveIndex(index)
+                  setActiveIndex(idx)
                   setAutoplay(false)
                 }}
-                className={`h-2 w-8 rounded-full transition-all ${activeIndex === index ? "bg-white" : "bg-white/30"}`}
-                whileHover={{ scale: 1.2 }}
-                whileTap={{ scale: 0.9 }}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  activeIndex === idx ? "w-8 bg-[#EAE0CF]" : "w-2 bg-[#7288AE]/40 hover:bg-[#7288AE]"
+                }`}
+                aria-label={`Go to slide ${idx + 1}`}
               />
             ))}
           </div>
